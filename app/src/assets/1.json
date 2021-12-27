@@ -1,0 +1,19 @@
+{
+    "name": "eren",
+    "symbol": "",
+    "image": "1.png",
+    "properties": {
+      "files": [
+        {
+          "uri": "1.png",
+          "type": "image/png"
+        }
+      ],
+      "creators": [
+        {
+          "address": "Fk9kmPBD6wNXfTQa8tyuFxTVUoN4Ajwu2Wc6nng43Sux",
+          "share": 100
+        }
+      ]
+    }
+  }

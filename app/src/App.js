@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import twitterLogo from './assets/twitter-logo.svg';
+import CandyMachine from './CandyMachine';
 
 // Constants
 const TWITTER_HANDLE = '_buildspace';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
 const App = () => {
+  const [walletAddress, setWalletAddress] = useState(null);
 
   const checkWallet = async() => {
     try {
@@ -20,6 +22,9 @@ const App = () => {
             'Connected with Public Key:',
             response.publicKey.toString()
           );
+
+          setWalletAddress(response.publicKey.toString());
+
         }
       } 
         else{
@@ -31,8 +36,15 @@ const App = () => {
     }
   }
   
-  const connectWallet = async () => {};
+const connectWallet = async () => {
+  const { solana } = window;
 
+  if (solana) {
+    const response = await solana.connect();
+    console.log('Connected with Public Key:', response.publicKey.toString());
+    setWalletAddress(response.publicKey.toString());
+  }
+};
   /*
    * We want to render this UI when the user hasn't connected
    * their wallet to our app yet.
@@ -60,8 +72,10 @@ const App = () => {
         <div className="header-container">
           <p className="header">🍭 Candy Drop</p>
           <p className="sub-text">NFT drop machine with fair mint</p>
-          {renderNotConnectedContainer()}
+          {!walletAddress && renderNotConnectedContainer()}
         </div>
+        {/* Check for walletAddress and then pass in walletAddress */}
+      {walletAddress && <CandyMachine walletAddress={window.solana} />}
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
           <a
