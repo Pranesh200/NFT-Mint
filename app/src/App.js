@@ -83,7 +83,7 @@ const connectWallet = async () => {
             href={TWITTER_LINK}
             target="_blank"
             rel="noreferrer"
-          >{`built on @${TWITTER_HANDLE}`}</a>
+          >{`built by Pranesh Anand`}</a>
         </div>
       </div>
     </div>
